@@ -26,24 +26,24 @@ subscriber.psubscribe('foo/*', (pattern, channel, message) => ...)
 ### Unsubscribing
 There are two ways to unsubscribe:
 * call `unsubscribe` or `punsubscribe`
-  ```js
-  const onMessage = (channel, message) => ...
-  const onPMessage = (pattern, channel, message) => ...
-  subscriber.subscribe('foo', onMessage)
-  subscriber.psubscribe('foo/*', onPMessage)
-  ...
-  subscriber.unsubscribe('foo', onMessage)
-  subscriber.unsubscribe('foo/*', onPMessage)
-  ```
+```js
+const onMessage = (channel, message) => ...
+const onPMessage = (pattern, channel, message) => ...
+subscriber.subscribe('foo', onMessage)
+subscriber.psubscribe('foo/*', onPMessage)
+...
+subscriber.unsubscribe('foo', onMessage)
+subscriber.unsubscribe('foo/*', onPMessage)
+```
 * call the function returned by `subscribe` or `psubscribe`
-  ```js
-  const unsubscribe = subscriber.subscribe('foo', onMessage)
-  unsubscribe()
-  ```
-  ```js
-  const unsubscribe = subscriber.psubscribe('foo/*', onPMessage)
-  unsubscribe()
-  ```
+```js
+const unsubscribe = subscriber.subscribe('foo', onMessage)
+unsubscribe()
+```
+```js
+const unsubscribe = subscriber.psubscribe('foo/*', onPMessage)
+unsubscribe()
+```
 
 ### `parseMessage` option
 
