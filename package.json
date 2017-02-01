@@ -1,7 +1,7 @@
 {
-  "name": "es2015-library-skeleton",
+  "name": "@jcoreio/redis-subscriber",
   "version": "0.0.0-development",
-  "description": "my personal skeleton for ES2015 library NPM packages",
+  "description": "subscribe specific callbacks to specific channels on the same redis client",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src test",
@@ -39,17 +39,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jedwards1211/es2015-library-skeleton.git"
+    "url": "https://github.com/jcoreio/redis-subscriber.git"
   },
   "keywords": [
-    "es2015"
+    "redis",
+    "pubsub"
   ],
   "author": "Andy Edwards",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jedwards1211/es2015-library-skeleton/issues"
+    "url": "https://github.com/jcoreio/redis-subscriber/issues"
   },
-  "homepage": "https://github.com/jedwards1211/es2015-library-skeleton#readme",
+  "homepage": "https://github.com/jcoreio/redis-subscriber#readme",
   "devDependencies": {
     "@jedwards1211/eslint-config": "^1.0.0",
     "@jedwards1211/eslint-config-flow": "^1.0.0",
@@ -75,9 +76,15 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
+    "redis": "^2.6.5",
+    "redis-mock": "^0.16.0",
     "rimraf": "^2.5.4",
     "semantic-release": "^6.3.2",
+    "sinon": "^1.17.7",
     "validate-commit-msg": "^2.8.2"
+  },
+  "peerDependencies": {
+    "redis": "^2.6.5"
   },
   "dependencies": {}
 }
