@@ -19,7 +19,7 @@ const debug = createDebug('redis-subscriber')
  *
  * This also automatically JSON.parses all messages.
  */
-export default class RedisSubscriber<M> {
+class RedisSubscriber<M> {
   _redis: RedisClient
 
   _subs: Map<string, Set<SubCallback<M>>> = new Map()
@@ -120,4 +120,6 @@ export default class RedisSubscriber<M> {
     }
   }
 }
+
+module.exports = RedisSubscriber
 
