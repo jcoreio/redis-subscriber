@@ -5,7 +5,7 @@ import type {RedisClient} from 'redis'
 type SubCallback = (channel: string, message: any) => any
 type PSubCallback = (pattern: string, channel: string, message: any) => any
 
-declare export default class RedisSubscriber {
+declare class RedisSubscriber {
   constructor(redis: RedisClient): void;
   subscribe(channel: string, callback: SubCallback): () => void;
   psubscribe(pattern: string, callback: PSubCallback): () => void;
@@ -13,3 +13,5 @@ declare export default class RedisSubscriber {
   punsubscribe(pattern: string, callback: PSubCallback): void;
 }
 
+// flow-issue
+declare var exports: typeof RedisSubscriber
