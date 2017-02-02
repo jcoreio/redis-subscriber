@@ -13,5 +13,5 @@ declare class RedisSubscriber {
   punsubscribe(pattern: string, callback: PSubCallback): void;
 }
 
-// flow-issue
+// $FlowFixMe
 declare var exports: typeof RedisSubscriber
