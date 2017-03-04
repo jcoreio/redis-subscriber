@@ -13,5 +13,4 @@ declare class RedisSubscriber {
   punsubscribe(pattern: string, callback: PSubCallback): void;
 }
 
-// $FlowFixMe
-declare var exports: typeof RedisSubscriber
+declare module.exports: typeof RedisSubscriber
