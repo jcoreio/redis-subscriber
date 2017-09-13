@@ -2,15 +2,48 @@
 
 import type {RedisClient} from 'redis'
 
-type SubCallback = (channel: string, message: any) => any
-type PSubCallback = (pattern: string, channel: string, message: any) => any
+type SubCallback<M> = (channel: string, message: M) => any
+type PSubCallback<M> = (pattern: string, channel: string, message: M) => any
 
-declare class RedisSubscriber {
-  constructor(redis: RedisClient): void;
-  subscribe(channel: string, callback: SubCallback): () => void;
-  psubscribe(pattern: string, callback: PSubCallback): () => void;
-  unsubscribe(channel: string, callback: SubCallback): void;
-  punsubscribe(pattern: string, callback: PSubCallback): void;
+type Options<M> = {
+  parseMessage?: (message: string) => M,
 }
 
-declare module.exports: typeof RedisSubscriber
+/**
+ * The redis client sends all subscribed events to any callback.  This keeps track of which
+ * callbacks are associated with which subscriptions and sends each event to only those callbacks
+ * that are subscribed for it.
+ *
+ * This also automatically JSON.parses all messages.
+ */
+declare class RedisSubscriber<M> {
+  /**
+   * Starts the redis client
+   */
+  constructor(redis: RedisClient, options?: Options<M>): void;
+
+  /**
+   * Subscribes a callback to the given channel
+   * @returns {function(): *} an unsubscribe function
+   */
+  subscribe(channel: string, callback: SubCallback<M>): () => void;
+
+  /**
+   * Subscribes a callback to the given pattern
+   * @returns {function(): *} an unsubscribe function
+   */
+  psubscribe(pattern: string, callback: PSubCallback<M>): () => void;
+
+  /**
+   * Unsubscribes a callback from the given channel
+   */
+  unsubscribe(channel: string, callback: SubCallback<M>): void;
+
+  /**
+   * Unsubscribes a callback from the given pattern
+   */
+  punsubscribe(pattern: string, callback: PSubCallback<M>): void;
+}
+
+declare module.exports: typeof RedisSubscriber;
+
